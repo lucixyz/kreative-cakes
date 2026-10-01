@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { CakeArt } from "./CakeArt";
-import { FLAVORS } from "./data";
-import { SectionHead } from "./Catalog";
+import { SectionHead } from "./SectionHead";
 
 const FROSTING_COLORS = ["#f2a7bd", "#fbf3ee", "#c0405f", "#a98bd6", "#a9d6f0", "#9bc27a", "#f6c445", "#6b4033", "#22262e"];
+const FLAVORS = ["Chocolate", "Vanilla", "Red Velvet", "Ube", "Strawberry", "Mocha"];
 const FILLINGS = ["Cream cheese", "Chocolate ganache", "Fresh fruit", "Custard"];
 const TOPPERS = ["none", "candles", "flowers", "butterfly"] as const;
 
@@ -35,7 +35,7 @@ export function Customizer() {
   const [message, setMessage] = useState("Happy Birthday");
 
   return (
-    <section className="section" id="customizer">
+    <section id="customizer">
       <SectionHead title="Build Your Own Cake" sub="Choose every detail and watch your cake update." />
       <div className="custom-grid">
         <div className="controls">
@@ -49,7 +49,7 @@ export function Customizer() {
               ))}
             </div>
           </fieldset>
-          <Choice label="Flavor" options={FLAVORS.slice(0, 6).map((f) => f.name)} value={flavor} onChange={setFlavor} />
+          <Choice label="Flavor" options={FLAVORS} value={flavor} onChange={setFlavor} />
           <Choice label="Filling" options={FILLINGS} value={filling} onChange={setFilling} />
           <fieldset className="ctl">
             <legend>Decorations</legend>

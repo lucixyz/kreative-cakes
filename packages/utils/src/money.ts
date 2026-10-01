@@ -22,10 +22,11 @@ export function applyBps(amount: Centavos, bps: number): Centavos {
 
 export function formatMoney(
   amount: Centavos,
-  options: { currency?: string; locale?: string } = {},
+  options: { currency?: string; locale?: string; /** Show ₱1,250 instead of ₱1,250.00 for whole-peso amounts. */ hideZeroCents?: boolean } = {},
 ): string {
-  const { currency = LOCALE_CONFIG.currency, locale = LOCALE_CONFIG.locale } = options;
-  return new Intl.NumberFormat(locale, { style: "currency", currency }).format(
+  const { currency = LOCALE_CONFIG.currency, locale = LOCALE_CONFIG.locale, hideZeroCents = false } = options;
+  const whole = hideZeroCents && amount % LOCALE_CONFIG.minorUnitsPerMajor === 0;
+  return new Intl.NumberFormat(locale, { style: "currency", currency, ...(whole ? { minimumFractionDigits: 0, maximumFractionDigits: 0 } : {}) }).format(
     amount / LOCALE_CONFIG.minorUnitsPerMajor,
   );
 }

@@ -1,32 +1,41 @@
 import { Route, Routes } from "react-router-dom";
 import { RequireCustomer } from "./components/RequireCustomer";
+import { SiteLayout } from "./layout/SiteLayout";
+import { Cart } from "./pages/Cart";
+import { Checkout } from "./pages/Checkout";
+import { AiDesignerPage, CakeBuilderPage } from "./pages/Designers";
 import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
 import { Placeholder } from "./pages/Placeholder";
+import { ProductDetail } from "./pages/ProductDetail";
+import { Shop } from "./pages/Shop";
 import { Signup } from "./pages/Signup";
+
+const INFO_PAGES: [string, string][] = [
+  ["faq", "FAQs"], ["delivery", "Delivery & pickup"], ["terms", "Terms & Conditions"],
+  ["privacy", "Privacy Policy"], ["refunds", "Cancellation & refunds"], ["allergens", "Allergen information"],
+];
 
 export function App() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/shop" element={<Placeholder title="Shop" />} />
-      <Route path="/cake-builder" element={<Placeholder title="Cake builder" />} />
-      <Route path="/ai-designer" element={<Placeholder title="AI designer" />} />
-      <Route path="/cart" element={<Placeholder title="Cart" />} />
-      <Route path="/checkout" element={<Placeholder title="Checkout" />} />
-      <Route element={<RequireCustomer />}>
-        <Route path="/orders" element={<Placeholder title="My orders" />} />
-        <Route path="/profile" element={<Placeholder title="My profile" />} />
+      <Route element={<SiteLayout />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/shop" element={<Shop />} />
+        <Route path="/shop/:slug" element={<ProductDetail />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/ai-designer" element={<AiDesignerPage />} />
+        <Route path="/cake-builder" element={<CakeBuilderPage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route element={<RequireCustomer />}>
+          <Route path="/orders" element={<Placeholder title="Track an order" />} />
+          <Route path="/profile" element={<Placeholder title="My profile" />} />
+        </Route>
+        {INFO_PAGES.map(([path, title]) => <Route key={path} path={`/${path}`} element={<Placeholder title={title} />} />)}
+        <Route path="*" element={<Placeholder title="Page not found" note="That page does not exist." />} />
       </Route>
-      <Route path="/faq" element={<Placeholder title="FAQs" />} />
-      <Route path="/delivery" element={<Placeholder title="Delivery Information" />} />
-      <Route path="/contact" element={<Placeholder title="Contact" />} />
-      <Route path="/refunds" element={<Placeholder title="Refund / Cancellation Policy" />} />
-      <Route path="/privacy" element={<Placeholder title="Privacy Policy" />} />
-      <Route path="/terms" element={<Placeholder title="Terms" />} />
-      <Route path="*" element={<Placeholder title="Page not found" note="That page does not exist." />} />
     </Routes>
   );
 }

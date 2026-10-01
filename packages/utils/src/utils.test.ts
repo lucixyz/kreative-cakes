@@ -32,3 +32,11 @@ describe("seeded random", () => {
     expect([a(), a(), a()]).toEqual([b(), b(), b()]);
   });
 });
+
+describe("formatMoney hideZeroCents", () => {
+  it("drops .00 only for whole-peso amounts", () => {
+    expect(formatMoney(125_000, { hideZeroCents: true })).toBe("₱1,250");
+    expect(formatMoney(125_050, { hideZeroCents: true })).toBe("₱1,250.50");
+    expect(formatMoney(125_000)).toBe("₱1,250.00");
+  });
+});

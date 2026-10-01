@@ -7,3 +7,4 @@ export * from "./cake-design";
 export * from "./ai-suggestion";
 export * from "./payments";
 export * from "./auth";
+export * from "./checkout";

@@ -1,8 +1,6 @@
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { CakeArt, type CakeArtProps } from "./CakeArt";
-import { AI_STEPS } from "./data";
-import { SectionHead } from "./Catalog";
 
 const COLORS: [string, string][] = [
   ["pink", "#f2a7bd"], ["blue", "#a9d6f0"], ["red", "#c0405f"], ["purple", "#a98bd6"], ["ube", "#a98bd6"],
@@ -35,7 +33,7 @@ export function AiDesigner() {
   };
 
   return (
-    <section className="section ai" id="ai-designer">
+    <section className="ai" id="ai-designer">
       <div className="ai-grid">
         <div className="stack">
           <span className="chip dark">✨ AI Cake Designer</span>
@@ -58,23 +56,6 @@ export function AiDesigner() {
           <Link to="/cake-builder" className="pill ghost">Customize in 3D →</Link>
         </div>
       </div>
-    </section>
-  );
-}
-
-export function HowItWorks() {
-  return (
-    <section className="section">
-      <SectionHead title="How AI Cake Design Works" />
-      <ol className="steps">
-        {AI_STEPS.map((s, i) => (
-          <li key={s.title}>
-            <span className="step-no">{i + 1}</span>
-            <h3>{s.title}</h3>
-            <p className="muted">{s.text}</p>
-          </li>
-        ))}
-      </ol>
     </section>
   );
 }

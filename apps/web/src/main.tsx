@@ -6,12 +6,15 @@ import { BrowserRouter } from "react-router-dom";
 import { App } from "./App";
 import "./store/store.css";
 import { authService } from "./auth";
+import { CartProvider } from "./cart/CartContext";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <AuthProvider service={authService}>
       <BrowserRouter>
-        <App />
+        <CartProvider>
+          <App />
+        </CartProvider>
       </BrowserRouter>
     </AuthProvider>
   </StrictMode>,
