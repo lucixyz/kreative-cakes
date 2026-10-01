@@ -1,7 +1,7 @@
 // Browser E2E for customer/admin auth separation, in real Edge/Chrome.
-// Serves the dev-mode web exports of both apps, each on its OWN origin (as they are isolated in
-// production). NOTE: Expo Router ignores `baseUrl` in development builds, so here the admin routes
-// are /login and /dashboard; in a production deployment they are served under /admin.
+// Serves builds of the Vite sites (apps/web, apps/admin), each on its OWN origin (as they are
+// isolated in production). Built with VITE_ALLOW_MOCK_AUTH=true because production builds refuse
+// to run the mock auth service.
 // Run: pnpm e2e:auth   (BROWSER_CHANNEL=chrome to use Chrome instead of Edge)
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
@@ -30,14 +30,14 @@ async function serveDir(dir) {
 }
 
 if (!process.env.SKIP_BUILD) {
-  // Dev-mode exports: production builds deliberately refuse to run the mock auth service.
-  for (const [app, env] of [["customer", {}], ["admin", { ADMIN_BASE_URL: "none" }]]) {
-    const r = spawnSync(`pnpm --filter @cakeshop/${app} export:web:dev`, { cwd: root, shell: true, stdio: "ignore", env: { ...process.env, ...env } });
+  // Production builds refuse the mock auth service unless VITE_ALLOW_MOCK_AUTH=true.
+  for (const [app, env] of [["web", { VITE_ALLOW_MOCK_AUTH: "true" }], ["admin", { VITE_ALLOW_MOCK_AUTH: "true" }]]) {
+    const r = spawnSync(`pnpm --filter @cakeshop/${app} build`, { cwd: root, shell: true, stdio: "ignore", env: { ...process.env, ...env } });
     if (r.status !== 0) throw new Error(`Building ${app} failed`);
   }
 }
 
-const customer = await serveDir(join(root, "apps/customer/dist"));
+const customer = await serveDir(join(root, "apps/web/dist"));
 const admin = await serveDir(join(root, "apps/admin/dist"));
 const browser = await chromium.launch({ channel: process.env.BROWSER_CHANNEL ?? "msedge" });
 
@@ -81,7 +81,7 @@ await scenario("admin login has no signup link and /signup is not a signup page"
   await page.getByText("Staff sign in").waitFor();
   assert.equal(await page.getByText(/create an account|sign up/i).count(), 0);
   await page.goto(`${admin.base}/signup`);
-  await page.getByText("Unmatched Route").waitFor();
+  await page.getByText("Page not found").waitFor();
   assert.equal(await page.getByLabel("Confirm password").count(), 0);
 });
 

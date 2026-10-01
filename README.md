@@ -1,10 +1,10 @@
 # Kreative Cakes
 
-AI-powered cake and bakery e-commerce platform for [Kreative Cakes](https://www.facebook.com/kreativecakes.ph): customer app (iOS/Android/Web), admin web app, and API. **Status: prototype, Phase 1 (foundation).**
+AI-powered cake and bakery e-commerce platform for [Kreative Cakes](https://www.facebook.com/kreativecakes.ph): customer website, admin website, customer mobile app (iOS/Android), and API. **Status: prototype, Phase 1 (foundation).**
 
 ## Stack
 
-pnpm workspaces + Turborepo · TypeScript (strict) · Expo SDK 57 + Expo Router + React Native Web · Hono API · Zod 4 · Vitest · Supabase (planned; mocks for now).
+pnpm workspaces + Turborepo · TypeScript (strict) · Vite + React + React Router (customer website and admin website) · Expo SDK 57 + Expo Router (customer mobile app) · Hono API · Zod 4 · Vitest · Supabase (planned; mocks for now).
 
 ## Requirements
 
@@ -21,9 +21,9 @@ pnpm verify        # typecheck + lint + test
 
 | What | Command |
 | --- | --- |
-| Customer (Expo dev server) | `pnpm dev:customer` |
-| Customer on web | `pnpm dev:customer:web` |
-| Admin (web, http://localhost:8082/login) | `pnpm dev:admin` |
+| Customer website (Vite, http://localhost:5173) | `pnpm dev:web` |
+| Admin website (Vite, http://localhost:8082/login) | `pnpm dev:admin` |
+| Customer mobile app (Expo) | `pnpm dev:customer` |
 | API (http://localhost:8787/health) | `pnpm dev:api` |
 
 Copy `.env.example` to `.env` for local config. Only `EXPO_PUBLIC_*` values may reach client bundles; secrets stay server-side.
@@ -46,7 +46,11 @@ packages/database    PROTOTYPE seed/mock data (migrations come later)
 
 Dependency direction: `config → utils`, `validation → types → domain`, `database → validation/types`. Apps depend on packages, never the reverse.
 
-## Monorepo / Metro notes
+## Deploying the websites (Vercel)
+
+Two Vercel projects from this repo, Root Directory `apps/web` and `apps/admin`; each has a `vercel.json`. The mock auth service is disabled in production builds; for a demo deployment set `VITE_ALLOW_MOCK_AUTH=true`.
+
+## Monorepo / Metro notes (mobile app)
 
 - `.npmrc` sets `node-linker=hoisted`; Metro needs a flat `node_modules`.
 - Expo SDK 52+ configures Metro for workspaces automatically, so each app's `metro.config.js` is just `getDefaultConfig(__dirname)`.

@@ -7,15 +7,15 @@
   },
   "scripts": {
     "dev:customer": "pnpm --filter @cakeshop/customer start",
-    "dev:customer:web": "pnpm --filter @cakeshop/customer web",
-    "dev:admin": "pnpm --filter @cakeshop/admin web",
+    "dev:admin": "pnpm --filter @cakeshop/admin dev",
     "dev:api": "pnpm --filter @cakeshop/api dev",
     "typecheck": "turbo run typecheck",
     "test": "turbo run test",
     "lint": "eslint .",
     "build": "turbo run build",
     "verify": "pnpm typecheck && pnpm lint && pnpm test",
-    "e2e:auth": "node tests/e2e/auth-redirects.mjs"
+    "e2e:auth": "node tests/e2e/auth-redirects.mjs",
+    "dev:web": "pnpm --filter @cakeshop/web dev"
   },
   "devDependencies": {
     "@cakeshop/config": "workspace:*",
