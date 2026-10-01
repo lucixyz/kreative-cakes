@@ -9,6 +9,12 @@ import { authService } from "./auth";
 import { CartProvider } from "./cart/CartContext";
 
 createRoot(document.getElementById("root")!).render(
+  !authService ? (
+    <main style={{ padding: 24, fontFamily: "system-ui, sans-serif" }}>
+      <h1>Sign-in is not configured</h1>
+      <p>This deployment has no authentication backend yet.</p>
+    </main>
+  ) : (
   <StrictMode>
     <AuthProvider service={authService}>
       <BrowserRouter>
@@ -17,5 +23,6 @@ createRoot(document.getElementById("root")!).render(
         </CartProvider>
       </BrowserRouter>
     </AuthProvider>
-  </StrictMode>,
+  </StrictMode>
+  ),
 );
