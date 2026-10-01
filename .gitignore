@@ -1,0 +1,32 @@
+node_modules
+.turbo
+.expo
+dist
+coverage
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+
+# OS / editor
+Thumbs.db
+.idea
+.vscode/*
+!.vscode/extensions.json
+
+# Expo / native builds
+ios
+android
+*.tsbuildinfo
+web-build
+.expo-shared
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# Supabase local
+supabase/.branches
+supabase/.temp

@@ -1,0 +1,22 @@
+{
+  "name": "@cakeshop/domain",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@cakeshop/types": "workspace:*",
+    "@cakeshop/utils": "workspace:*",
+    "@cakeshop/validation": "workspace:*"
+  },
+  "devDependencies": {
+    "@cakeshop/config": "workspace:*",
+    "@cakeshop/database": "workspace:*",
+    "typescript": "~6.0.3",
+    "vitest": "^5.0.3"
+  }
+}
