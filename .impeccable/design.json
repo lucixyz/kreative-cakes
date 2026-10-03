@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-03T00:00:00.000Z",
+  "title": "Design System: Kreative Cakes",
+  "extensions": {
+    "colorMeta": {
+      "rose": { "role": "primary", "displayName": "Panaderya Rose", "canonical": "#9B5568", "tonalRamp": ["#F4E3E7", "#F0CDD6", "#9B5568", "#7F4256", "#5A2C3B"] },
+      "glass": { "role": "neutral", "displayName": "Display Glass", "canonical": "#F4F3F1", "tonalRamp": ["#FFFFFF", "#F4F3F1", "#E2DDDB"] },
+      "card-stock": { "role": "surface", "displayName": "Card Stock", "canonical": "#FFFDF8", "tonalRamp": ["#FFFDF8", "#E6DFD0"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Shop sign", "purpose": "Home headline and page titles." },
+      "price": { "displayName": "Handwritten price", "purpose": "Prices and step numerals only." }
+    },
+    "shadows": [
+      { "name": "price-card", "value": "0 10px 18px -12px rgba(35,26,29,0.6)", "purpose": "The price card hanging below the cake." },
+      { "name": "shelf", "value": "0 10px 16px -8px rgba(0,0,0,0.33)", "purpose": "The glass shelf edge in the display case." }
+    ],
+    "motion": [
+      { "name": "rise", "value": "0.7s cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "One hero entrance. Disabled for prefers-reduced-motion." }
+    ],
+    "breakpoints": [
+      { "name": "tablet", "value": "900px" },
+      { "name": "phone", "value": "520px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The main action on any screen.",
+      "html": "<button class=\"ds-btn\">Design Your Cake</button>",
+      "css": ".ds-btn { background: #9B5568; color: #fff; min-height: 46px; padding: 0 24px; border: 0; border-radius: 10px; font: 600 16px 'Hanken Grotesk Variable', system-ui, sans-serif; cursor: pointer; } .ds-btn:hover { background: #7F4256; } .ds-btn:focus-visible { outline: 2px solid #7F4256; outline-offset: 2px; }"
+    },
+    {
+      "name": "Price Card",
+      "kind": "card",
+      "refersTo": "price-card",
+      "description": "Name, price and availability for one cake, clipped to the glass.",
+      "html": "<div class=\"ds-price\"><span class=\"ds-clip\"></span><b>Strawberry Chiffon Dream</b><p>From <strong>₱1,250</strong></p><span class=\"ds-tape\">Here today</span></div>",
+      "css": ".ds-price { position: relative; background: #FFFDF8; border: 1px solid #E6DFD0; border-radius: 4px; padding: 16px 14px 14px; width: 220px; font-family: 'Hanken Grotesk Variable', system-ui, sans-serif; color: #231A1D; box-shadow: 0 10px 18px -12px rgba(35,26,29,0.6); } .ds-clip { position: absolute; top: -7px; left: 50%; width: 32px; height: 13px; margin-left: -16px; border-radius: 3px; background: #B9C1C5; border: 1px solid #98A2A7; } .ds-price p { margin: 4px 0 8px; color: #66595D; } .ds-price strong { font: 600 32px Caveat, cursive; color: #231A1D; } .ds-tape { background: #CFE6C8; color: #1D4519; font-weight: 600; font-size: 13px; padding: 3px 10px; border-radius: 2px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Glass Display Case",
+    "overview": "A neighborhood panaderya's glass case, online. Cakes on shelves, each with a clipped price card that says what it costs, whether it is there today, and how many days ahead to order. Rose is committed at page scale; the room is glass-white.",
+    "keyCharacteristics": ["Scalloped rose awning under the header", "Rose case back wall with steel shelves", "Card-stock price cards with a steel clip", "Tape-style availability with the words on it"],
+    "rules": [
+      { "name": "Handwriting is for prices", "body": "Caveat is used for prices and step numerals only.", "section": "typography" },
+      { "name": "One radius system", "body": "8px surfaces, 10px controls, 4px price cards, 2px tape.", "section": "elevation" }
+    ],
+    "dos": ["Do write lead times in words on the tape", "Do label illustrations until real photos exist"],
+    "donts": ["Don't use gradients or blur", "Don't introduce a second corner radius"]
+  }
+}

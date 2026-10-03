@@ -1,16 +1,16 @@
 /* Shared web styles for the Vite sites (apps/web, apps/admin). Values mirror tokens.ts. */
 :root {
-  --background: #faf7f2;
+  --background: #f4f3f1;
   --surface: #ffffff;
-  --text: #2b2623;
-  --text-muted: #6b625c;
-  --border: #d9d0c7;
-  --primary: #8a4b3c;
+  --text: #231a1d;
+  --text-muted: #66595d;
+  --border: #d6cfcc;
+  --primary: #9b5568;
   --on-primary: #ffffff;
   --danger: #b3261e;
-  --admin-bar: #1f2430;
+  --admin-bar: #3a2229;
   --radius: 10px;
-  --radius-lg: 16px;
+  --radius-lg: 8px;
   --touch: 48px;
 }
 
