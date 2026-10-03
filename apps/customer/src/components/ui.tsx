@@ -1,12 +1,13 @@
 import { MAX_LINE_QUANTITY } from "@cakeshop/domain";
 import type { Availability, StorefrontProduct } from "@cakeshop/database";
 import type { ReactNode } from "react";
-import { Pressable, Text, View, type ViewStyle } from "react-native";
-import { MIN_TOUCH, c, serif } from "../theme";
+import { Image, Pressable, Text, View, type ViewStyle } from "react-native";
+import { cakeImage } from "../assets";
+import { MIN_TOUCH, c, font, radius, serif } from "../theme";
 
 export function Btn({ label, onPress, variant = "dark", disabled = false, style, children }: { label: string; onPress: () => void; variant?: "dark" | "ghost" | "light"; disabled?: boolean; style?: ViewStyle; children?: ReactNode }) {
-  const bg = variant === "dark" ? c.ink : variant === "light" ? "#fff" : "transparent";
-  const fg = variant === "dark" ? "#fff" : c.ink;
+  const bg = variant === "dark" ? c.rose : variant === "light" ? "#fff" : "transparent";
+  const fg = variant === "dark" ? "#fff" : variant === "light" ? c.roseDark : c.ink;
   return (
     <Pressable
       accessibilityRole="button"
@@ -14,26 +15,27 @@ export function Btn({ label, onPress, variant = "dark", disabled = false, style,
       accessibilityState={{ disabled }}
       disabled={disabled}
       onPress={onPress}
-      style={[{ minHeight: MIN_TOUCH, borderRadius: 999, paddingHorizontal: 22, alignItems: "center", justifyContent: "center", flexDirection: "row", gap: 8, backgroundColor: bg, borderWidth: variant === "ghost" ? 1 : 0, borderColor: "#CFC4B8", opacity: disabled ? 0.5 : 1 }, style]}
+      style={[{ minHeight: MIN_TOUCH, borderRadius: radius.control, paddingHorizontal: 22, alignItems: "center", justifyContent: "center", flexDirection: "row", gap: 8, backgroundColor: bg, borderWidth: variant === "ghost" ? 1 : 0, borderColor: "#CFC4B8", opacity: disabled ? 0.5 : 1 }, style]}
     >
       {children}
-      <Text style={{ color: fg, fontWeight: "600", fontSize: 16 }}>{label}</Text>
+      <Text style={{ color: fg, fontFamily: font.bodyBold, fontSize: 16 }}>{label}</Text>
     </Pressable>
   );
 }
 
 export function availabilityText(a: Availability): string {
-  if (a.kind === "today") return "Available today";
+  if (a.kind === "today") return "Here today";
   if (a.kind === "soldout") return "Sold out today";
-  return `Pre-order · ${a.days} ${a.days === 1 ? "day" : "days"}`;
+  return `Order ${a.days} ${a.days === 1 ? "day" : "days"} ahead`;
 }
 
+/** Tape on the price card: green here today, amber pre-order with the days written out, grey sold out. */
 export function AvailabilityBadge({ availability }: { availability: Availability }) {
   const sold = availability.kind === "soldout";
   const today = availability.kind === "today";
   return (
-    <View style={{ alignSelf: "flex-start", backgroundColor: today ? c.greenBg : sold ? c.soldBg : c.preBg, borderRadius: 999, paddingHorizontal: 10, paddingVertical: 3 }}>
-      <Text style={{ fontSize: 12, color: today ? c.green : sold ? c.soldText : c.ink }}>{availabilityText(availability)}</Text>
+    <View style={{ alignSelf: "flex-start", backgroundColor: today ? c.greenBg : sold ? c.soldBg : c.preBg, borderRadius: radius.tape, paddingHorizontal: 10, paddingVertical: 3 }}>
+      <Text style={{ fontSize: 13, fontFamily: font.bodyBold, color: today ? c.green : sold ? c.soldText : c.preText }}>{availabilityText(availability)}</Text>
     </View>
   );
 }
@@ -45,24 +47,21 @@ export function Stepper({ value, onChange, min = 1 }: { value: number; onChange:
     </Pressable>
   );
   return (
-    <View accessibilityLabel={`Quantity ${value}`} style={{ flexDirection: "row", alignItems: "center", borderWidth: 1.5, borderColor: "#D3C8BC", borderRadius: 999, backgroundColor: "#fff" }}>
+    <View accessibilityLabel={`Quantity ${value}`} style={{ flexDirection: "row", alignItems: "center", borderWidth: 1.5, borderColor: "#D3C8BC", borderRadius: radius.control, backgroundColor: "#fff" }}>
       {step("Decrease quantity", -1, value <= min)}
-      <Text style={{ minWidth: 28, textAlign: "center", fontWeight: "600", fontSize: 16 }}>{value}</Text>
+      <Text style={{ minWidth: 28, textAlign: "center", fontFamily: font.bodyBold, fontSize: 16 }}>{value}</Text>
       {step("Increase quantity", 1, value >= MAX_LINE_QUANTITY)}
     </View>
   );
 }
 
-/** Placeholder illustration (stacked tiers on a plate) until real product photos exist. */
-export function CakeThumb({ product, height = 150 }: { product: Pick<StorefrontProduct, "look">; height?: number }) {
-  const { tiers, color, tone } = product.look;
-  const tierH = height / 4.2;
+/** The cake on the shelf. An illustration (labeled) until real product photos replace the PNGs in assets/images. */
+export function CakeThumb({ product, height = 200, label = true }: { product: Pick<StorefrontProduct, "slug" | "name" | "look">; height?: number; label?: boolean }) {
+  const source = cakeImage(product.slug);
   return (
-    <View style={{ height, backgroundColor: tone, alignItems: "center", justifyContent: "flex-end", paddingBottom: height * 0.12 }}>
-      {Array.from({ length: tiers }, (_, i) => tiers - 1 - i).map((i) => (
-        <View key={i} style={{ width: tierH * (3.1 - i * 0.7), height: tierH, backgroundColor: color, borderTopLeftRadius: 10, borderTopRightRadius: 10, borderBottomWidth: 3, borderBottomColor: "#0000001A" }} />
-      ))}
-      <View style={{ width: tierH * 4, height: 8, borderRadius: 4, backgroundColor: "#FFFAF8" }} />
+    <View style={{ height, backgroundColor: product.look.tone, overflow: "hidden" }}>
+      {source ? <Image source={source} accessibilityLabel={product.name} resizeMode="cover" style={{ width: "100%", height: "100%", transform: [{ scale: 1.08 }] }} /> : null}
+      {label ? <Text style={{ position: "absolute", left: 8, bottom: 6, fontSize: 11, color: c.muted, backgroundColor: "#FFFFFFB3", paddingHorizontal: 6, borderRadius: 2 }}>Illustration</Text> : null}
     </View>
   );
 }

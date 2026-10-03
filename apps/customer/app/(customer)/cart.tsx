@@ -1,3 +1,4 @@
+import { Ionicons } from "@expo/vector-icons";
 import { lineKey } from "@cakeshop/domain";
 import { useRouter } from "expo-router";
 import { useState } from "react";
@@ -17,7 +18,7 @@ export default function CartScreen() {
 
   const header = (
     <View style={{ flexDirection: "row", alignItems: "center", gap: 14 }}>
-      <Pressable accessibilityRole="button" accessibilityLabel="Back" onPress={() => (router.canGoBack() ? router.back() : router.replace("/"))} style={{ width: 48, height: 48, borderRadius: 24, backgroundColor: "#fff", borderWidth: 1, borderColor: c.line, alignItems: "center", justifyContent: "center" }}><Text style={{ fontSize: 22 }}>‹</Text></Pressable>
+      <Pressable accessibilityRole="button" accessibilityLabel="Back" onPress={() => (router.canGoBack() ? router.back() : router.replace("/"))} style={{ width: 48, height: 48, borderRadius: 24, backgroundColor: "#fff", borderWidth: 1, borderColor: c.line, alignItems: "center", justifyContent: "center" }}><Ionicons name="chevron-back" size={22} color={c.ink} /></Pressable>
       <Text style={{ ...heading(32), flex: 1 }}>Your cart</Text>
       <Text style={{ color: c.muted }}>{units} {units === 1 ? "item" : "items"}</Text>
     </View>
@@ -27,8 +28,12 @@ export default function CartScreen() {
     return (
       <View style={{ flex: 1, backgroundColor: c.cream, padding: 20, paddingTop: insets.top + 12, gap: 24 }}>
         {header}
-        <Text style={{ color: c.muted, fontSize: 16 }}>Your cart is empty.</Text>
-        <Btn label="Shop cakes" onPress={() => router.replace("/shop")} />
+        <View style={{ alignItems: "center", gap: 10, paddingVertical: 24 }}>
+          <Text accessibilityRole="header" style={heading(28)}>Your cart is empty</Text>
+          <Text style={{ color: c.muted, fontSize: 16, textAlign: "center" }}>Add a ready-made cake, or design your own.</Text>
+        </View>
+        <Btn label="Browse cakes" onPress={() => router.replace("/shop")} />
+        <Btn label="Design a cake" variant="ghost" onPress={() => router.replace("/ai-designer")} />
       </View>
     );
   }
@@ -45,7 +50,7 @@ export default function CartScreen() {
               <View style={{ flex: 1, gap: 2 }}>
                 <View style={{ flexDirection: "row", justifyContent: "space-between", gap: 8 }}>
                   <Text style={{ flex: 1, fontWeight: "600", fontSize: 17, color: c.ink }}>{l.name}</Text>
-                  <Pressable accessibilityRole="button" accessibilityLabel={`Remove ${l.name}`} onPress={() => remove(key)} hitSlop={10}><Text style={{ fontSize: 18 }}>🗑</Text></Pressable>
+                  <Pressable accessibilityRole="button" accessibilityLabel={`Remove ${l.name}`} onPress={() => remove(key)} hitSlop={10}><Ionicons name="trash-outline" size={20} color={c.ink} /></Pressable>
                 </View>
                 <Text style={{ color: c.muted }}>{l.sizeLabel} · {l.flavor}</Text>
                 <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: 8 }}>

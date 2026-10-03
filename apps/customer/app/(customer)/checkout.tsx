@@ -1,9 +1,10 @@
+import { Ionicons } from "@expo/vector-icons";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { storefrontProducts } from "@cakeshop/database";
 import { deliveryFee, orderTotal } from "@cakeshop/domain";
 import { CHECKOUT_PAYMENT_METHODS, TIME_SLOTS, checkoutSchema, type CheckoutInput } from "@cakeshop/validation";
 import { useRouter } from "expo-router";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { Pressable, ScrollView, Text, TextInput, View, type TextInputProps } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -36,7 +37,6 @@ export default function CheckoutScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const { lines, clear } = useCart();
-  const [placed, setPlaced] = useState<{ ref: string; total: number } | null>(null);
 
   // Earliest date we can fulfill = today + the longest pre-order lead time in the cart.
   const earliest = useMemo(() => {
@@ -58,19 +58,9 @@ export default function CheckoutScreen() {
   const slot = watch("timeSlot");
 
   const back = (
-    <Pressable accessibilityRole="button" accessibilityLabel="Back" onPress={() => (router.canGoBack() ? router.back() : router.replace("/cart"))} style={{ width: 48, height: 48, borderRadius: 24, backgroundColor: "#fff", borderWidth: 1, borderColor: c.line, alignItems: "center", justifyContent: "center" }}><Text style={{ fontSize: 22 }}>‹</Text></Pressable>
+    <Pressable accessibilityRole="button" accessibilityLabel="Back" onPress={() => (router.canGoBack() ? router.back() : router.replace("/cart"))} style={{ width: 48, height: 48, borderRadius: 24, backgroundColor: "#fff", borderWidth: 1, borderColor: c.line, alignItems: "center", justifyContent: "center" }}><Ionicons name="chevron-back" size={22} color={c.ink} /></Pressable>
   );
 
-  if (placed) {
-    return (
-      <View style={{ flex: 1, backgroundColor: c.cream, padding: 20, paddingTop: insets.top + 24, gap: 14 }}>
-        <Text style={heading(34)}>Thank you!</Text>
-        <Text style={{ fontSize: 16 }}>Your order {placed.ref} ({peso(placed.total)}) was recorded.</Text>
-        <Text style={{ color: c.muted }}>This is a prototype: no payment was taken and no order was sent to the bakery yet.</Text>
-        <Btn label="Keep shopping" onPress={() => router.replace("/shop")} />
-      </View>
-    );
-  }
   if (lines.length === 0) {
     return (
       <View style={{ flex: 1, backgroundColor: c.cream, padding: 20, paddingTop: insets.top + 12, gap: 20 }}>
@@ -83,7 +73,7 @@ export default function CheckoutScreen() {
   const submit = handleSubmit(async () => {
     // PROTOTYPE: the API will create the order, re-price it from the catalog and start the payment.
     await new Promise((r) => setTimeout(r, 400));
-    setPlaced({ ref: `KC-${Date.now().toString(36).toUpperCase()}`, total });
+    router.replace({ pathname: "/order-confirmed", params: { ref: `KC-${Date.now().toString(36).toUpperCase()}`, total: String(total), mode: fulfillment, method: payment } });
     clear();
   });
 

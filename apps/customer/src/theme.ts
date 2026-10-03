@@ -1,22 +1,36 @@
-import { Platform, type TextStyle } from "react-native";
+import type { TextStyle } from "react-native";
 
-// Mobile app theme (see Design.pdf). Mirrors the website palette. Custom fonts (Cormorant Garamond /
-// DM Sans) are not bundled yet; the platform serif is used for headings until they are.
+// Mobile theme: the same "panaderya" world as the website. Glass-white room, committed rose,
+// card-stock white for price cards and order slips. Fonts are the website's (Bricolage Grotesque for
+// headings, Hanken Grotesk for UI, Caveat for prices), loaded in app/_layout.tsx.
 export const c = {
-  cream: "#F5F1EC",
-  ink: "#2A2019",
-  muted: "#6F635A",
-  line: "#E1D8CE",
-  card: "#FFFFFF",
+  cream: "#F4F3F1",
+  ink: "#231A1D",
+  muted: "#66595D",
+  line: "#E2DDDB",
+  card: "#FFFDF8",
+  stockLine: "#E6DFD0",
   rose: "#9B5568",
   roseDark: "#7F4256",
+  roseTint: "#F4E3E7",
   danger: "#B3261E",
-  green: "#3C5A3A",
-  greenBg: "#E0EADB",
-  preBg: "#EEE6DC",
-  soldBg: "#F2DCDF",
-  soldText: "#8A3A46",
+  green: "#1D4519",
+  greenBg: "#CFE6C8",
+  preBg: "#F8DFA8",
+  preText: "#5A3D00",
+  soldBg: "#DCDAD8",
+  soldText: "#3B3536",
 } as const;
 
-export const serif: TextStyle = { fontFamily: Platform.select({ ios: "Georgia", android: "serif", default: "Georgia, serif" }), fontWeight: "500" };
+/** Font family names registered by expo-font in app/_layout.tsx. */
+export const font = {
+  display: "BricolageGrotesque_700Bold",
+  body: "HankenGrotesk_400Regular",
+  bodyBold: "HankenGrotesk_600SemiBold",
+  price: "Caveat_600SemiBold",
+} as const;
+
+export const serif: TextStyle = { fontFamily: font.display, letterSpacing: -0.5 };
 export const MIN_TOUCH = 48;
+/** Corner radii: 8 for surfaces, 10 for controls, 2 for tape. */
+export const radius = { card: 8, control: 10, tape: 2 } as const;

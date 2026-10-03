@@ -1,3 +1,4 @@
+import { Ionicons } from "@expo/vector-icons";
 import { defaultProductSize, findStorefrontProduct } from "@cakeshop/database";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useState } from "react";
@@ -6,7 +7,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useCart } from "../../../src/cart/CartContext";
 import { peso } from "../../../src/components/ProductTile";
 import { AvailabilityBadge, Btn, CakeThumb, Stepper, heading } from "../../../src/components/ui";
-import { c } from "../../../src/theme";
+import { c, font } from "../../../src/theme";
 
 const roundBtn = { width: 44, height: 44, borderRadius: 22, backgroundColor: "#fff", alignItems: "center", justifyContent: "center" } as const;
 
@@ -45,8 +46,8 @@ export default function ProductScreen() {
         <View>
           <CakeThumb product={product} height={300} />
           <View style={{ position: "absolute", top: insets.top + 8, left: 16, right: 16, flexDirection: "row", justifyContent: "space-between" }}>
-            <Pressable accessibilityRole="button" accessibilityLabel="Back" onPress={() => (router.canGoBack() ? router.back() : router.replace("/shop"))} style={roundBtn}><Text style={{ fontSize: 22 }}>‹</Text></Pressable>
-            <Pressable accessibilityRole="button" accessibilityLabel="Favorite" accessibilityState={{ selected: fav }} onPress={() => setFav(!fav)} style={roundBtn}><Text style={{ fontSize: 20, color: fav ? "#C2334F" : c.ink }}>{fav ? "♥" : "♡"}</Text></Pressable>
+            <Pressable accessibilityRole="button" accessibilityLabel="Back" onPress={() => (router.canGoBack() ? router.back() : router.replace("/shop"))} style={roundBtn}><Ionicons name="chevron-back" size={22} color={c.ink} /></Pressable>
+            <Pressable accessibilityRole="button" accessibilityLabel="Favorite" accessibilityState={{ selected: fav }} onPress={() => setFav(!fav)} style={roundBtn}><Ionicons name={fav ? "heart" : "heart-outline"} size={22} color={fav ? "#C2334F" : c.ink} /></Pressable>
           </View>
         </View>
 
@@ -56,7 +57,7 @@ export default function ProductScreen() {
             <AvailabilityBadge availability={product.availability} />
           </View>
           <Text style={heading(34)}>{product.name}</Text>
-          <Text style={{ fontSize: 24, fontWeight: "600", color: c.ink }}>{peso(size.priceCentavos)}</Text>
+          <Text style={{ fontFamily: font.price, fontSize: 40, lineHeight: 44, color: c.ink }}>{peso(size.priceCentavos)}</Text>
           <Text style={{ color: c.muted, fontSize: 16, lineHeight: 24 }}>{product.description}</Text>
 
           <Text style={{ fontWeight: "600", fontSize: 16 }}>Size</Text>
