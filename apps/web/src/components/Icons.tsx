@@ -1,6 +1,16 @@
-const base = { className: "ico", viewBox: "0 0 24 24", "aria-hidden": true } as const;
+import { ArrowRight, Check, Handbag, Heart, Info, List, Plus, Receipt, Sparkle, Storefront, Trash, X } from "@phosphor-icons/react";
 
-export const StoreIcon = () => <svg {...base}><path d="M4 9l1.5-5h13L20 9" /><path d="M4 9v11h16V9" /><path d="M10 20v-6h4v6" /></svg>;
-export const InfoIcon = () => <svg {...base}><circle cx="12" cy="12" r="9" /><path d="M12 11v5M12 8v.01" /></svg>;
-export const SparkIcon = () => <svg {...base}><path d="M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2z" /></svg>;
-export const BagIcon = () => <svg {...base}><path d="M6 8h12l-1 12H7L6 8z" /><path d="M9 8a3 3 0 016 0" /></svg>;
+// One icon family (Phosphor, regular weight) for the whole storefront. Decorative: always aria-hidden.
+const SIZE = 20;
+export const StoreIcon = () => <Storefront size={SIZE} aria-hidden="true" />;
+export const InfoIcon = () => <Info size={SIZE} aria-hidden="true" />;
+export const SparkIcon = () => <Sparkle size={SIZE} aria-hidden="true" />;
+export const BagIcon = () => <Handbag size={SIZE} aria-hidden="true" />;
+export const HeartIcon = ({ filled = false }: { filled?: boolean }) => <Heart size={SIZE} weight={filled ? "fill" : "regular"} aria-hidden="true" />;
+export const MenuIcon = ({ open }: { open: boolean }) => (open ? <X size={22} aria-hidden="true" /> : <List size={22} aria-hidden="true" />);
+export const CloseIcon = () => <X size={12} weight="bold" aria-hidden="true" />;
+export const TrashIcon = () => <Trash size={SIZE} aria-hidden="true" />;
+export const ArrowIcon = () => <ArrowRight size={16} aria-hidden="true" />;
+export const CheckIcon = ({ size = 18 }: { size?: number }) => <Check size={size} weight="bold" aria-hidden="true" />;
+export const ReceiptIcon = () => <Receipt size={22} aria-hidden="true" />;
+export const PlusIcon = () => <Plus size={24} aria-hidden="true" />;

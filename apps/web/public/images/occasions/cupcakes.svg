@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Illustration of cupcakes">
+<defs>
+  <linearGradient id="body-o5" x1="0" x2="1"><stop offset="0" stop-color="#d2adb5"/><stop offset="0.35" stop-color="#f5ced7"/><stop offset="1" stop-color="#c8a5ad"/></linearGradient>
+  <radialGradient id="light-o5" cx="0.22" cy="0.12" r="0.9"><stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+  <linearGradient id="table-o5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/><stop offset="1" stop-color="#ffffff" stop-opacity="0.25"/></linearGradient>
+</defs>
+<rect width="1200" height="800" fill="#eadfd6"/>
+<rect y="600" width="1200" height="200" fill="#f1eae4"/>
+<rect y="600" width="1200" height="200" fill="url(#table-o5)"/>
+<rect width="1200" height="800" fill="url(#light-o5)"/>
+<g transform="translate(600 676) scale(1.4) translate(-600 -676)"><g>
+  <ellipse cx="450" cy="648" rx="124" ry="20" fill="#2a201922"/>
+  <path d="M350 516 L374 640 h152 L550 516z" fill="#f2ece4" stroke="#e1d6c8"/>
+  <line x1="390" y1="520" x2="402" y2="636" stroke="#e1d6c8"/><line x1="430" y1="520" x2="434" y2="636" stroke="#e1d6c8"/><line x1="470" y1="520" x2="466" y2="636" stroke="#e1d6c8"/><line x1="510" y1="520" x2="498" y2="636" stroke="#e1d6c8"/>
+  <path d="M342 520 q108 -40 216 0 q-16 -68 -60 -80 q-4 -60 -48 -76 q-44 16 -48 76 q-44 12 -60 80z" fill="#f6d4dc"/>
+  <g><circle cx="450" cy="404" r="24" fill="#41508f"/><circle cx="442.8" cy="396.8" r="6.7" fill="#ffffff" opacity="0.35"/><circle cx="452.4" cy="401.6" r="3.4" fill="#2a3466"/></g>
+</g><g>
+  <ellipse cx="750" cy="648" rx="124" ry="20" fill="#2a201922"/>
+  <path d="M650 516 L674 640 h152 L850 516z" fill="#f2ece4" stroke="#e1d6c8"/>
+  <line x1="690" y1="520" x2="702" y2="636" stroke="#e1d6c8"/><line x1="730" y1="520" x2="734" y2="636" stroke="#e1d6c8"/><line x1="770" y1="520" x2="766" y2="636" stroke="#e1d6c8"/><line x1="810" y1="520" x2="798" y2="636" stroke="#e1d6c8"/>
+  <path d="M642 520 q108 -40 216 0 q-16 -68 -60 -80 q-4 -60 -48 -76 q-44 16 -48 76 q-44 12 -60 80z" fill="#f6d4dc"/>
+  <g><circle cx="750" cy="404" r="24" fill="#41508f"/><circle cx="742.8" cy="396.8" r="6.7" fill="#ffffff" opacity="0.35"/><circle cx="752.4" cy="401.6" r="3.4" fill="#2a3466"/></g>
+</g><g>
+  <ellipse cx="600" cy="684" rx="142.6" ry="23" fill="#2a201922"/>
+  <path d="M485 533.4 L512.6 676 h174.8 L715 533.4z" fill="#f2ece4" stroke="#e1d6c8"/>
+  <line x1="531" y1="538" x2="544.8" y2="672" stroke="#e1d6c8"/><line x1="577" y1="538" x2="581.6" y2="672" stroke="#e1d6c8"/><line x1="623" y1="538" x2="618.4" y2="672" stroke="#e1d6c8"/><line x1="669" y1="538" x2="655.2" y2="672" stroke="#e1d6c8"/>
+  <path d="M475.8 538 q124.2 -46 248.4 0 q-18.400000000000002 -78.2 -69 -92 q-4.6000000000000005 -69 -55.199999999999996 -87.4 q-50.6 18.400000000000002 -55.199999999999996 87.4 q-50.6 13.799999999999999 -69 92z" fill="#f4c9d3"/>
+  <g><circle cx="600" cy="404.6" r="27.599999999999998" fill="#41508f"/><circle cx="591.7" cy="396.3" r="7.7" fill="#ffffff" opacity="0.35"/><circle cx="602.8" cy="401.8" r="3.9" fill="#2a3466"/></g>
+</g></g>
+</svg>

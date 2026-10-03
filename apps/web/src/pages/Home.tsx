@@ -1,61 +1,87 @@
 import { storefrontProducts } from "@cakeshop/database";
 import { Link } from "react-router-dom";
+import { ArrowIcon } from "../components/Icons";
 import { ProductCard } from "../components/ProductCard";
 import { CakeArt } from "../store/CakeArt";
+import { Photo, occasionPhoto } from "../store/Photo";
 
 const STEPS = [
-  ["01", "Describe your idea", "Type the occasion and theme, or upload an invitation for inspiration."],
-  ["02", "Generate your cake", "Get a suggested design with tiers, colors and decorations."],
-  ["03", "Customize in 3D", "Change flavors, colors and toppers and see every update live."],
-  ["04", "Bakery reviews it", "Our bakers check the design and send your final quotation."],
-  ["05", "Order and celebrate", "Pay the deposit, track production, and pick up or get it delivered."],
+  ["Describe your idea", "Type the occasion and theme, or upload an invitation for inspiration."],
+  ["Generate your cake", "Get a suggested design with tiers, colors and decorations."],
+  ["Customize in 3D", "Change flavors, colors and toppers and see every update live."],
+  ["Bakery reviews it", "Our bakers check the design and send your final quotation."],
+  ["Order and celebrate", "Pay the deposit, track production, and pick up or get it delivered."],
 ] as const;
 
 const OCCASIONS = [
-  { name: "Birthdays", to: "/shop?occasion=birthday", tone: "#efe3e1" },
-  { name: "Weddings", to: "/shop?occasion=wedding", tone: "#ece4d8" },
-  { name: "Anniversaries", to: "/shop?occasion=anniversary", tone: "#e6e0ec" },
-  { name: "Corporate events", to: "/shop?occasion=corporate", tone: "#e3e5db" },
-  { name: "Cupcakes & pastries", to: "/shop?type=cupcakes", tone: "#eadfd6" },
-  { name: "Bento cakes", to: "/shop?type=bento", tone: "#e6ddd0" },
+  { key: "birthday", name: "Birthdays", to: "/shop?occasion=birthday", tiers: 2, color: "#f2a7bd" },
+  { key: "wedding", name: "Weddings", to: "/shop?occasion=wedding", tiers: 3, color: "#fbf3ee" },
+  { key: "anniversary", name: "Anniversaries", to: "/shop?occasion=anniversary", tiers: 2, color: "#a98bd6" },
+  { key: "corporate", name: "Corporate events", to: "/shop?occasion=corporate", tiers: 1, color: "#9bc27a" },
+  { key: "cupcakes", name: "Cupcakes", to: "/shop?type=cupcakes", tiers: 1, color: "#e2b94d" },
+  { key: "bento", name: "Bento cakes", to: "/shop?type=bento", tiers: 1, color: "#c0405f" },
 ] as const;
 
-// PROTOTYPE home. Cake images are drawn placeholders until real photos exist.
+// Only claims the system can back: review before payment, allergen info on every cake, chosen fulfillment.
+const WHY = [
+  ["Reviewed before you pay", "Every custom design is checked by our bakers, who send a quotation first."],
+  ["Made to your details", "Choose the size, flavor and a message for the cake. Pre-orders show how many days ahead to order."],
+  ["Allergens listed", "Every cake shows its allergen information, so you can decide before you order."],
+  ["Pickup or delivery", "Choose either at checkout, with the date and time that suit your celebration."],
+] as const;
+
+const shelf = (from: number) => storefrontProducts.slice(from, from + 4);
+
+// The home page is the shop window: a sign, then the glass display case with the day's cakes.
+// Illustrations stand in for photography until real photos are added (see store/Photo.tsx).
 export function Home() {
   return (
     <main>
-      <section className="hero">
-        <div className="hero-copy">
-          <span className="chip">✦ Custom cakes, designed with AI and made by hand</span>
-          <h1>Your Dream Cake, Designed With AI.</h1>
-          <p>Describe your celebration or upload an invitation. See your cake in 3D, adjust every detail, and our bakers review it before you pay.</p>
+      <section className="sign">
+        <div className="sign-inner">
+          <h1>Fresh cakes, or design your own.</h1>
+          <p>Pick a ready-made cake, or describe your celebration and our bakers review and quote it before you pay.</p>
           <div className="row">
             <Link to="/ai-designer" className="pill solid">Design Your Cake</Link>
             <Link to="/shop" className="pill outline">Shop Cakes</Link>
           </div>
         </div>
-        <div className="hero-art" aria-hidden="true"><CakeArt tiers={3} color="#f4b6c6" topper="butterfly" /></div>
-        <ul className="hero-tags">
-          <li>[ Designed With AI ]</li><li>[ Reviewed by Our Bakers ]</li><li>[ Made to Order ]</li>
-        </ul>
       </section>
 
-      <section className="section">
-        <div className="section-head">
-          <div><h2>Featured cakes</h2><p className="muted">Baked fresh, ready to order today.</p></div>
-          <Link to="/shop" className="text-link">View all cakes →</Link>
+      <section className="case" aria-label="Today's cakes">
+        <div className="case-glass">
+          {[shelf(0), shelf(4)].map((row, i) => (
+            <div key={i} className="shelf">
+              <div className="shelf-row">{row.map((p) => <ProductCard key={p.id} product={p} />)}</div>
+            </div>
+          ))}
         </div>
-        <div className="grid-4">
-          {storefrontProducts.slice(0, 4).map((p) => <ProductCard key={p.id} product={p} />)}
+        <div className="case-foot"><Link to="/shop" className="text-link">See every cake <ArrowIcon /></Link></div>
+      </section>
+
+      <section className="section custom-choices" aria-labelledby="custom-h">
+        <div className="custom-copy">
+          <h2 id="custom-h">Your cake, your way</h2>
+          <p className="muted">Start with an idea, then choose each detail. Our bakers review the design and send you a quotation before any payment.</p>
+          <ul className="plain-list">
+            <li><strong>Design:</strong> describe it to the AI Designer, or build it step by step.</li>
+            <li><strong>Size and flavor:</strong> pick the tiers, flavors and decorations that fit your guests.</li>
+            <li><strong>Message:</strong> add a short message for the cake.</li>
+            <li><strong>Date:</strong> choose a pickup or delivery date that gives us the time we need.</li>
+          </ul>
+          <div className="row"><Link to="/cake-builder" className="pill dark">Customize a Cake</Link><Link to="/ai-designer" className="pill outline-dark">Try the AI Designer</Link></div>
         </div>
+        <ul className="why-grid" aria-label="Why order with us">
+          {WHY.map(([title, text]) => <li key={title}><h3>{title}</h3><p className="muted">{text}</p></li>)}
+        </ul>
       </section>
 
       <section className="band">
         <div className="section no-top">
-          <div className="center"><h2>How it works</h2><p className="muted">From an idea to your celebration table in five steps.</p></div>
+          <div className="center"><h2>How ordering works</h2><p className="muted">From an idea to your celebration table in five steps.</p></div>
           <ol className="steps">
-            {STEPS.map(([n, title, text]) => (
-              <li key={n}><span className="step-no">{n}</span><h3>{title}</h3><p className="muted">{text}</p></li>
+            {STEPS.map(([title, text], i) => (
+              <li key={title}><span className="step-no">{i + 1}</span><h3>{title}</h3><p className="muted">{text}</p></li>
             ))}
           </ol>
         </div>
@@ -65,9 +91,9 @@ export function Home() {
         <div className="section-head"><h2>Shop by occasion</h2></div>
         <div className="occasion-grid">
           {OCCASIONS.map((o) => (
-            <Link key={o.name} to={o.to} className="occasion" style={{ background: o.tone }}>
-              <span className="muted small">Category photo</span>
-              <span className="occasion-foot"><span className="occasion-name">{o.name}</span><span className="arrow" aria-hidden="true">→</span></span>
+            <Link key={o.name} to={o.to} className="occasion">
+              <Photo src={occasionPhoto(o.key)} alt="" caption={false} className="wide" fallback={<CakeArt tiers={o.tiers} color={o.color} label="" />} />
+              <span className="occasion-foot"><span className="occasion-name">{o.name}</span><span className="arrow" aria-hidden="true"><ArrowIcon /></span></span>
             </Link>
           ))}
         </div>
@@ -76,10 +102,9 @@ export function Home() {
       <section className="ai-band">
         <div className="ai-inner">
           <div className="stack">
-            <span className="eyebrow light">✦ AI CAKE DESIGNER</span>
             <h2>Tell us the theme. We’ll sketch the cake.</h2>
-            <p>Type a description or upload your invitation. The designer suggests tiers, colors and decorations, then you fine-tune everything in 3D.</p>
-            <Link to="/ai-designer" className="pill solid align-start">Try the AI Designer →</Link>
+            <p>Type a description or upload your invitation. The designer suggests tiers, colors and decorations, then you fine-tune everything in 3D. Our bakers always review it first.</p>
+            <Link to="/ai-designer" className="pill solid align-start">Try the AI Designer <ArrowIcon /></Link>
           </div>
           <div className="ai-card">
             <h3>What cake are you imagining?</h3>

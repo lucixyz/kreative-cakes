@@ -1,21 +1,21 @@
 /* Storefront styles (see Design.pdf). Layered on @cakeshop/ui/web.css; scoped under .store. */
 .store {
-  --cream: #f5f1ec;
-  --ink: #2a2019;
-  --muted: #6f635a;
-  --line: #e1d8ce;
+  --cream: #f4f3f1;
+  --ink: #231a1d;
+  --muted: #66595d;
+  --line: #e2dddb;
   --rose: #9b5568;
   --rose-dark: #7f4256;
   --card: #ffffff;
   --max: 1180px;
   background: var(--cream);
   color: var(--ink);
-  font-family: "DM Sans", system-ui, sans-serif;
-  min-height: 100vh;
-  accent-color: #2a2019;
+  font-family: "Hanken Grotesk Variable", system-ui, sans-serif;
+  min-height: 100dvh;
+  accent-color: #231a1d;
   position: relative;
 }
-.store h1, .store h2, .store h3, .store .brand { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 500; }
+.store h1, .store h2, .store h3, .store .brand { font-family: "Bricolage Grotesque Variable", system-ui, sans-serif; font-weight: 600; letter-spacing: -0.02em; }
 .store h1 { font-size: clamp(32px, 4vw, 48px); line-height: 1.1; }
 .store h2 { font-size: clamp(26px, 3vw, 36px); }
 .store h3 { font-size: 20px; }
@@ -69,7 +69,7 @@
 /* hero */
 .hero { margin: 12px; border-radius: 28px; padding: 150px 56px 96px; min-height: 620px; background: radial-gradient(circle at 78% 50%, #ad6a7d 0%, var(--rose) 55%); color: #fff; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 32px; align-items: center; position: relative; overflow: hidden; }
 .hero-copy { display: flex; flex-direction: column; gap: 20px; align-items: flex-start; }
-.hero h1 { font-size: clamp(40px, 5.4vw, 68px); font-weight: 500; }
+.hero h1 { font-size: clamp(40px, 5.4vw, 68px); font-weight: 600; letter-spacing: -0.02em; }
 .hero p { max-width: 460px; font-size: 16px; opacity: 0.95; margin: 0; }
 .hero-art { max-width: 400px; width: 100%; justify-self: center; filter: drop-shadow(0 24px 24px #0003); }
 .hero-tags { position: absolute; left: 56px; right: 56px; bottom: 24px; display: flex; justify-content: space-between; font-size: 13px; opacity: 0.85; padding-top: 18px; border-top: 1px solid #ffffff33; }
@@ -85,20 +85,20 @@
 .band .center p { margin: 6px 0 0; }
 .steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; margin-top: 36px; }
 .steps li { display: flex; flex-direction: column; gap: 6px; }
-.steps h3 { font-family: "DM Sans", sans-serif; font-size: 15px; font-weight: 600; }
+.steps h3 { font-family: "Hanken Grotesk Variable", system-ui, sans-serif; font-size: 15px; font-weight: 600; }
 .steps p { margin: 0; font-size: 14px; }
-.step-no { font-family: "Cormorant Garamond", serif; font-size: 34px; color: var(--rose); }
+.step-no { font-family: "Bricolage Grotesque Variable", system-ui, sans-serif; font-size: 34px; color: var(--rose); }
 .occasion-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
 .occasion { min-height: 140px; border-radius: 18px; padding: 16px 18px; text-decoration: none; display: flex; flex-direction: column; justify-content: space-between; }
 .occasion-foot { display: flex; align-items: center; justify-content: space-between; }
-.occasion-name { font-family: "Cormorant Garamond", serif; font-size: 26px; }
+.occasion-name { font-family: "Bricolage Grotesque Variable", system-ui, sans-serif; font-size: 26px; }
 .arrow { width: 32px; height: 32px; border-radius: 50%; background: #fff; display: grid; place-items: center; }
 .ai-band { background: #2a2019; color: #fff; margin-top: 72px; padding: 72px 16px; }
 .ai-inner { max-width: var(--max); margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
 .ai-inner h2 { font-size: clamp(30px, 4vw, 46px); }
 .ai-inner p { margin: 0; color: #e0d5cd; }
 .ai-card { background: #fff; color: var(--ink); border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 12px; }
-.ai-card h3 { font-family: "DM Sans", sans-serif; font-size: 15px; font-weight: 600; }
+.ai-card h3 { font-family: "Hanken Grotesk Variable", system-ui, sans-serif; font-size: 15px; font-weight: 600; }
 .ai-card .muted { margin: 0; }
 .ai-sample { background: var(--cream); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; color: var(--ink) !important; font-size: 14px; }
 .tag { background: var(--cream); border-radius: 999px; padding: 5px 12px; font-size: 13px; }
@@ -130,7 +130,7 @@
 .search { display: flex; flex-direction: column; gap: 4px; width: 280px; }
 .store input[type="search"], .store .promo input, .store .field input, .store .field select, .store .sort select, .store .ctl input[type="text"] { min-height: 44px; border: 1px solid #d3c8bc; border-radius: 999px; padding: 0 16px; background: #fff; color: var(--ink); font: inherit; font-weight: 400; }
 .store .field input[type="checkbox"], .store .field input[type="radio"] { min-height: 0; }
-.store .field label { font-weight: 500; }
+.store .field label { font-weight: 600; letter-spacing: -0.02em; }
 .store .field.invalid input { border-color: var(--danger); }
 .shop-layout { display: grid; grid-template-columns: 200px 1fr; gap: 32px; align-items: start; }
 .filters-toggle { display: none; }
@@ -185,10 +185,10 @@
 .totals .grand { border-top: 1px solid var(--line); padding-top: 12px; font-size: 20px; font-weight: 600; }
 .checkout { display: grid; grid-template-columns: 1fr 360px; gap: 32px; align-items: start; margin-top: 12px; }
 .card { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 20px; }
-.card h2 { font-family: "DM Sans", sans-serif; font-size: 17px; font-weight: 600; margin-bottom: 12px; }
+.card h2 { font-family: "Hanken Grotesk Variable", system-ui, sans-serif; font-size: 17px; font-weight: 600; margin-bottom: 12px; }
 .card.stack h2 { margin-bottom: 0; }
 .segmented { display: grid; grid-template-columns: 1fr 1fr; background: #ece6df; border-radius: 999px; padding: 4px; }
-.segmented label { text-align: center; padding: 10px; border-radius: 999px; cursor: pointer; font-weight: 500; }
+.segmented label { text-align: center; padding: 10px; border-radius: 999px; cursor: pointer; font-weight: 600; letter-spacing: -0.02em; }
 .segmented label.on { background: var(--ink); color: #fff; }
 .segmented input { position: absolute; opacity: 0; pointer-events: none; }
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -202,7 +202,7 @@
 .footer-grid { max-width: var(--max); margin: 0 auto; display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: 32px; }
 .footer .brand { font-size: 26px; }
 .footer p { margin: 6px 0 0; font-size: 14px; }
-.footer h3 { font-family: "DM Sans", sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 10px; }
+.footer h3 { font-family: "Hanken Grotesk Variable", system-ui, sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 10px; }
 .footer li { margin-bottom: 6px; font-size: 14px; }
 .footer a { text-decoration: none; color: var(--muted); }
 

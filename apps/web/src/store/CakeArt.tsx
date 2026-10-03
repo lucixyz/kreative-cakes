@@ -73,7 +73,7 @@ export function CakeArt({ tiers = 2, color = "#f2a7bd", shape = "round", drip = 
       })}
 
       {message ? (
-        <text x={cx} y={280 - TIER_H / 2 + 5} textAnchor="middle" fontFamily="Georgia, serif" fontStyle="italic" fontSize={15} fill={ink}>
+        <text x={cx} y={280 - TIER_H / 2 + 5} textAnchor="middle" fontFamily="Bricolage Grotesque Variable, system-ui, sans-serif" fontStyle="italic" fontSize={15} fill={ink}>
           {message.slice(0, 18)}
         </text>
       ) : null}

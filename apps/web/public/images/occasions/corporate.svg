@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Illustration of a corporate event cake">
+<defs>
+  <linearGradient id="body-o4" x1="0" x2="1"><stop offset="0" stop-color="#85a769"/><stop offset="0.35" stop-color="#a5c887"/><stop offset="1" stop-color="#7f9f64"/></linearGradient>
+  <radialGradient id="light-o4" cx="0.22" cy="0.12" r="0.9"><stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+  <linearGradient id="table-o4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/><stop offset="1" stop-color="#ffffff" stop-opacity="0.25"/></linearGradient>
+</defs>
+<rect width="1200" height="800" fill="#e3e5db"/>
+<rect y="648" width="1200" height="152" fill="#edeee8"/>
+<rect y="648" width="1200" height="152" fill="url(#table-o4)"/>
+<rect width="1200" height="800" fill="url(#light-o4)"/>
+<g transform="translate(600 688) scale(1.4) translate(-600 -688)"><ellipse cx="600" cy="714" rx="248" ry="27.599999999999998" fill="#2a201922"/>
+<ellipse cx="600" cy="700" rx="244" ry="25.3" fill="#e9e1d8"/>
+<ellipse cx="600" cy="692" rx="244" ry="25.3" fill="#fbf8f4"/><g>
+  <clipPath id="clip-o4-3"><rect x="370" y="478" width="460" height="244.5" rx="12"/></clipPath>
+  <rect x="370" y="478" width="460" height="210" rx="12" fill="url(#body-o4)"/>
+  <ellipse cx="600" cy="688" rx="230" ry="34.5" fill="#8fb270" clip-path="url(#clip-o4-3)"/>
+  <g clip-path="url(#clip-o4-3)"></g>
+  
+  <ellipse cx="600" cy="478" rx="230" ry="34.5" fill="#c1d9ad"/>
+  <ellipse cx="544.8" cy="469.375" rx="92" ry="10.35" fill="#ffffff" opacity="0.35"/>
+</g><rect x="490" y="502" width="220" height="56" rx="8" fill="#fffaf2" opacity="0.92"/><rect x="510" y="524" width="180" height="10" rx="5" fill="#6d8855"/></g>
+</svg>

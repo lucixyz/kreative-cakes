@@ -1,12 +1,18 @@
 import { AuthProvider } from "@cakeshop/auth/react";
 import "@cakeshop/ui/web.css";
+import "@fontsource-variable/bricolage-grotesque";
+import "@fontsource-variable/hanken-grotesk";
+import "@fontsource/caveat/600.css";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { App } from "./App";
 import "./store/store.css";
+import "./store/account.css";
+import "./store/refine.css";
 import { authService } from "./auth";
 import { CartProvider } from "./cart/CartContext";
+import { FavoritesProvider } from "./cart/FavoritesContext";
 
 createRoot(document.getElementById("root")!).render(
   !authService ? (
@@ -19,7 +25,9 @@ createRoot(document.getElementById("root")!).render(
     <AuthProvider service={authService}>
       <BrowserRouter>
         <CartProvider>
-          <App />
+          <FavoritesProvider>
+            <App />
+          </FavoritesProvider>
         </CartProvider>
       </BrowserRouter>
     </AuthProvider>

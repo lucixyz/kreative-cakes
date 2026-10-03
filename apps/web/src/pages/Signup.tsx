@@ -31,7 +31,7 @@ export function Signup() {
 
   const { errors } = formState;
   return (
-    <AuthScreen title="Create your account">
+    <AuthScreen title="Create your account" note="Save designs, track quotes and orders in one place.">
       <form className="stack" onSubmit={submit} noValidate>
         <Field label="Full name" type="text" autoComplete="name" error={errors.fullName?.message} {...register("fullName")} />
         <Field label="Email" type="email" autoComplete="email" error={errors.email?.message} {...register("email")} />
@@ -44,8 +44,8 @@ export function Signup() {
           {errors.acceptTerms ? <span role="alert" className="error">{errors.acceptTerms.message}</span> : null}
         </div>
         {formError ? <p role="alert" className="error">{formError}</p> : null}
-        <button className="btn" type="submit" disabled={formState.isSubmitting}>Create account</button>
-        <p className="muted">Already have an account? <Link to="/login">Log in</Link></p>
+        <button className="pill dark block" type="submit" disabled={formState.isSubmitting}>Create account</button>
+        <p className="muted center">Already have an account? <Link to="/login" className="underline">Log in</Link></p>
       </form>
     </AuthScreen>
   );
