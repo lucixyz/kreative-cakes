@@ -97,7 +97,7 @@ await scenario("admin login -> dashboard; sign out -> login; dashboard closed ag
   await login(page, "admin@kreative.test", "Sign in");
   await settle(page, "/dashboard");
   await page.getByTestId("admin-user").getByText("Demo Admin", { exact: false }).waitFor();
-  await page.getByRole("link", { name: "Orders", exact: true }).click();
+  await page.getByRole("link", { name: /^Orders\s*\d*$/ }).click();
   await settle(page, "/dashboard/orders");
   await page.getByRole("button", { name: "Sign out" }).click();
   await settle(page, "/login");

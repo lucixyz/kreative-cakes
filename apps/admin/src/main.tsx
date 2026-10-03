@@ -1,5 +1,8 @@
 import { AuthProvider } from "@cakeshop/auth/react";
 import "@cakeshop/ui/web.css";
+import "@fontsource-variable/hanken-grotesk";
+import "@fontsource-variable/bricolage-grotesque";
+import "./admin.css";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
