@@ -190,8 +190,7 @@ const render = (s, W, H) => (s.kind === "cupcakes" ? cupcakes(s, W, H) : s.kind 
 
 mkdirSync(join(OUT, "products"), { recursive: true });
 mkdirSync(join(OUT, "occasions"), { recursive: true });
-writeFileSync(join(OUT, "hero.svg"), wholeCake({ id: "h", tiers: 3, color: "#f4b6c6", tone: "#f7e8ec", deco: "hero", band: "#c9a24a", seed: 11, label: "Illustration of a three-tier pink cake with gold butterflies" }));
 for (const p of PRODUCTS) writeFileSync(join(OUT, "products", `${p.slug}.svg`), render(p, 800, 1000));
 // Occasion tiles are 3:2: same scene, wider canvas.
 for (const o of OCCASIONS) writeFileSync(join(OUT, "occasions", `${o.slug}.svg`), render(o, 1200, 800));
-console.log(`Wrote ${1 + PRODUCTS.length + OCCASIONS.length} images to ${OUT}`);
+console.log(`Wrote ${PRODUCTS.length + OCCASIONS.length} images to ${OUT}`);

@@ -1,9 +1,9 @@
 import { storefrontProducts } from "@cakeshop/database";
 import { Link } from "react-router-dom";
-import { ArrowIcon } from "../components/Icons";
+import { ArrowIcon, SparkIcon } from "../components/Icons";
 import { ProductCard } from "../components/ProductCard";
 import { CakeArt } from "../store/CakeArt";
-import { Photo, occasionPhoto } from "../store/Photo";
+import { Photo, heroPhoto, occasionPhoto } from "../store/Photo";
 
 const STEPS = [
   ["Describe your idea", "Type the occasion and theme, or upload an invitation for inspiration."],
@@ -37,18 +37,27 @@ const shelf = (from: number) => storefrontProducts.slice(from, from + 4);
 export function Home() {
   return (
     <main>
-      <section className="sign">
-        <div className="sign-inner">
-          <h1>Fresh cakes, or design your own.</h1>
-          <p>Pick a ready-made cake, or describe your celebration and our bakers review and quote it before you pay.</p>
+      <section className="portal" aria-label="Welcome">
+        <div className="portal-photo">
+          <Photo src={heroPhoto} alt="A white cake with pink piping and heart sprinkles on a cake stand" caption={false} fallback={<span className="hero-empty">Hero photo goes here</span>} />
+        </div>
+        <div className="portal-door left" aria-hidden="true"><span>Your Dream Cake,</span></div>
+        <div className="portal-door right" aria-hidden="true"><span>Designed With AI.</span></div>
+        <div className="portal-card">
+          <span className="hero-chip"><SparkIcon /> Custom cakes, designed with AI and made by hand</span>
+          <h1>Your Dream Cake, Designed With AI.</h1>
+          <p>Describe your celebration or upload an invitation. See your cake in 3D, adjust every detail, and our bakers review it before you pay.</p>
           <div className="row">
             <Link to="/ai-designer" className="pill solid">Design Your Cake</Link>
             <Link to="/shop" className="pill outline">Shop Cakes</Link>
           </div>
+          <ul className="hero-tags"><li>Designed with AI</li><li>Reviewed by our bakers</li><li>Made to order</li></ul>
         </div>
+        <p className="portal-credit">Sample photo by <a href="https://unsplash.com/@biglaughkitchen" target="_blank" rel="noreferrer">Deva Williamson</a> on <a href="https://unsplash.com/photos/HjnFuC5pcA8" target="_blank" rel="noreferrer">Unsplash</a>. Not our cake.</p>
       </section>
 
-      <section className="case" aria-label="Today's cakes">
+      <section className="case" aria-labelledby="case-h">
+        <h2 id="case-h" className="case-title">Today's cakes</h2>
         <div className="case-glass">
           {[shelf(0), shelf(4)].map((row, i) => (
             <div key={i} className="shelf">

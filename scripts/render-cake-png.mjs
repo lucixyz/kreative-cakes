@@ -12,8 +12,8 @@ mkdirSync(OUT, { recursive: true });
 
 const browser = await chromium.launch({ channel: process.env.BROWSER_CHANNEL ?? "msedge" });
 const page = await browser.newPage({ deviceScaleFactor: 1 });
-// hero and the nine products are 4:5; occasion images are not needed on mobile.
-const jobs = [["hero", join(SRC, "hero.svg")], ...readdirSync(join(SRC, "products")).map((f) => [f.replace(".svg", ""), join(SRC, "products", f)])];
+// The nine products are 4:5; occasion images are not needed on mobile.
+const jobs = [...readdirSync(join(SRC, "products")).map((f) => [f.replace(".svg", ""), join(SRC, "products", f)])];
 for (const [name, file] of jobs) {
   const svg = readFileSync(file, "utf8");
   await page.setViewportSize({ width: 600, height: 750 });

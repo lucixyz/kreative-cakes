@@ -31,7 +31,7 @@ function SearchForm({ className }: { className: string }) {
   );
 }
 
-function Header() {
+function Header({ hero }: { hero: boolean }) {
   const [open, setOpen] = useState(false);
   const session = useSession();
   const service = useAuthService();
@@ -40,7 +40,7 @@ function Header() {
   useEffect(() => setOpen(false), [pathname]);
 
   return (
-    <header className="site-nav">
+    <header className={hero ? "site-nav hero-nav" : "site-nav"}>
       <nav className="nav-inner" aria-label="Main">
         <Link to="/" className="brand">Kreative Cakes</Link>
         <ul id="site-menu" className={`nav-links${open ? " open" : ""}`}>
@@ -64,7 +64,7 @@ function Header() {
           <button className="menu-btn" aria-label="Menu" aria-expanded={open} aria-controls="site-menu" onClick={() => setOpen((v) => !v)}><MenuIcon open={open} /></button>
         </div>
       </nav>
-      <div className="awning" aria-hidden="true" />
+      {hero ? null : <div className="awning" aria-hidden="true" />}
     </header>
   );
 }
@@ -75,7 +75,7 @@ export function SiteLayout() {
   return (
     <div className={`store${hero ? " is-home" : ""}`}>
       <a href="#main" className="skip">Skip to content</a>
-      <Header />
+      <Header hero={hero} />
       <div id="main" tabIndex={-1}><Outlet /></div>
       <Footer />
     </div>
